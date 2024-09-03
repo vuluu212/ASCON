@@ -13,7 +13,7 @@
 
 ## ✨Initialization
 
-![alt text](image.png)
+![alt text](image/image.png)
 
 ### Vector Khởi Tạo (`IV`)
 
@@ -41,7 +41,7 @@ Giá trị `IV` cho các biến thể Ascon là khác nhau chúng là các hằn
 
 ### Trạng Thái Ban Đầu (S)
 
-![alt text](image-1.png)
+![alt text](image/image-1.png)
 
 Trạng thái ban đầu (S) được hình thành bằng cách nối IV với khóa bí mật K và nonce N:
 
@@ -53,7 +53,7 @@ Trạng thái ban đầu (S) được hình thành bằng cách nối IV với k
 
 Trạng thái ban đầu `S` này là điểm khởi đầu cho quá trình hoán vị diễn ra trong giai đoạn khởi tạo của mã hóa Ascon.
 
-![alt text](image-2.png)
+![alt text](image/image-2.png)
 
 > `pa(S)` là kết quả của**a** vòng biến đổi áp dụng lên trạng thái ban đầu `S`
 > 
@@ -69,9 +69,9 @@ Trạng thái ban đầu `S` này là điểm khởi đầu cho quá trình hoá
 
 ## ✨Processing Associated Data
 
-![alt text](image-3.png)
+![alt text](image/image-3.png)
 
-![alt text](image-4.png)
+![alt text](image/image-4.png)
 
 - **Bước 1: Thêm Padding**
 
@@ -89,7 +89,7 @@ Sau khi thêm padding, dữ liệu A sẽ được chia thành s khối, mỗi k
 > Nếu A = 0: không có khối nào được tạo.
 > 
 
-![alt text](image-5.png)
+![alt text](image/image-5.png)
 
 > Sr: Phần đầu tiên của trạng thái S, gồm r bit (r = 64 bit)
 > 
@@ -97,11 +97,11 @@ Sau khi thêm padding, dữ liệu A sẽ được chia thành s khối, mỗi k
 > Sc: Phần còn lại của trạng thái S, gồm 320 -r bit (ví dụ: 256 bit đối với Ascon-128).
 > 
 
-![alt text](image-6.png)
+![alt text](image/image-6.png)
 
 ## ✨Processing Plaintext
 
-![alt text](image-7.png)
+![alt text](image/image-7.png)
 
 Quá trình đệm thêm một số 1 và số 0
 
@@ -115,25 +115,25 @@ Quá trình đệm thêm một số 1 và số 0
 
 ### Encryption
 
-![alt text](image-8.png)
+![alt text](image/image-8.png)
 
 Trích xuất khối bản mã `Ci` (ciphertext block `Ci`) được gán bởi `Sr` ( phần đầu tiên của trạng thái `S`) `XOR` với `Pi`
 
 Tiếp theo, nối `Ci` với `Sc` (phần còn lại của trạng thái `S`) rồi hoán vị b lần và gán cho `S`. Với `i=t` thì không cần hoán vị.
 
-![alt text](image-9.png)
+![alt text](image/image-9.png)
 
 Khối bản mã cuối cùng `Ct` được cắt ngắn theo `|P| mod r` bit đầu sao cho độ dài  nằm trong khoảng 0 đến r-1 bit. Và chiều dài của bản mã `C` giống với bản rõ `P`.
 
 ### Decryption
 
-![alt text](image-10.png)
+![alt text](image/image-10.png)
 
 Trừ lần lặp cuối cùng, khối bản rõ Pi được tính bằng cách `XOR` khối bản mã `Ci` với `Sr`.
 
 Tiếp theo, nối `Ci` với `Sc`  (phần còn lại của trạng thái `S`) rồi hoán vị `b` lần và gán cho `S` (trừ khối cuối cùng).
 
-![alt text](image-11.png)
+![alt text](image/image-11.png)
 
 Khối văn bản mã hóa cuối cùng đã được cắt ngắn `Sr` và `XOR` với `Ct cuối`để lấy phần cuối của văn bản gốc:
 
@@ -141,7 +141,7 @@ Trạng thái `S` được cập nhật với phần đoạn văn bản gốc cu
 
 ## ✨Finalization
 
-![alt text](image-12.png)
+![alt text](image/image-12.png)
 
 > c là độ dài của trạng thái (256 bit), k là độ dài khóa ( 128), và r là độ dài khối(64 bit).
 > 
@@ -154,23 +154,23 @@ Thẻ T bao gồm 128 bit, được XOR bởi 128 bit cuối của cả S và K
 
 `Pa` và `Pb` chỉ khác nhau về số vòng. Số vòng a và số vòng b là các thông số bảo mật có thể điều chỉnh.
 
-![alt text](image-13.png)
+![alt text](image/image-13.png)
 
 320 bit S được chia thành 5 thanh ghi 64 bit
 
 - Addition of Constants (Pc)
     
-    ![Hằng số tròn cr được sử dụng trong mỗi vòng i của pa và pb](image-14.png)
+    ![Hằng số tròn cr được sử dụng trong mỗi vòng i của pa và pb](image/image-14.png)
     
     Hằng số tròn cr được sử dụng trong mỗi vòng i của pa và pb
     
-    ![alt text](image-15.png)
+    ![alt text](image/image-15.png)
     
 - Substitution Layer (Ps)
     
     Sau đó lấy từng bit một của mỗi xi trong đó `x0` là `MSB` còn x4 là `LSB` và so sánh với bảng dưới đây làm lần lượt hết 64 bit.
     
-    ![S-box S 5-bit của Ascon làm bảng tra cứu](image-16.png)
+    ![S-box S 5-bit của Ascon làm bảng tra cứu](image/image-16.png)
     
     S-box S 5-bit của Ascon làm bảng tra cứu
     
@@ -196,7 +196,7 @@ Thẻ T bao gồm 128 bit, được XOR bởi 128 bit cuối của cả S và K
     
 - Linear Diffusion Layer (Ps)
     
-    ![alt text](image-17.png)
+    ![alt text](image/image-17.png)
     
     Σ0(x0)
     
