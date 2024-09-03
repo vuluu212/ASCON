@@ -13,7 +13,7 @@
 
 ## ✨Initialization
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0e7c9ce0-b713-4dbe-9577-be1bbceae63b/03db3bf3-25e3-42b0-9e44-319499ecc82c/image.png)
+![alt text](image.png)
 
 ### Vector Khởi Tạo (`IV`)
 
@@ -41,7 +41,7 @@ Giá trị `IV` cho các biến thể Ascon là khác nhau chúng là các hằn
 
 ### Trạng Thái Ban Đầu (S)
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0e7c9ce0-b713-4dbe-9577-be1bbceae63b/30daa434-3684-4579-96c2-8b98b1b3c0bf/image.png)
+![alt text](image-1.png)
 
 Trạng thái ban đầu (S) được hình thành bằng cách nối IV với khóa bí mật K và nonce N:
 
@@ -53,7 +53,7 @@ Trạng thái ban đầu (S) được hình thành bằng cách nối IV với k
 
 Trạng thái ban đầu `S` này là điểm khởi đầu cho quá trình hoán vị diễn ra trong giai đoạn khởi tạo của mã hóa Ascon.
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0e7c9ce0-b713-4dbe-9577-be1bbceae63b/8437ff69-4fa4-426c-8ed6-954f471c242a/image.png)
+![alt text](image-2.png)
 
 > `pa(S)` là kết quả của**a** vòng biến đổi áp dụng lên trạng thái ban đầu `S`
 > 
@@ -69,9 +69,9 @@ Trạng thái ban đầu `S` này là điểm khởi đầu cho quá trình hoá
 
 ## ✨Processing Associated Data
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0e7c9ce0-b713-4dbe-9577-be1bbceae63b/d4a38939-3a01-4149-9477-ec58847e0ca9/image.png)
+![alt text](image-3.png)
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0e7c9ce0-b713-4dbe-9577-be1bbceae63b/ff1c68cc-d346-4667-9271-04c030111a96/image.png)
+![alt text](image-4.png)
 
 - **Bước 1: Thêm Padding**
 
@@ -89,7 +89,7 @@ Sau khi thêm padding, dữ liệu A sẽ được chia thành s khối, mỗi k
 > Nếu A = 0: không có khối nào được tạo.
 > 
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0e7c9ce0-b713-4dbe-9577-be1bbceae63b/c3b0a68c-2ef6-4845-80c7-02f9a3ad9a5b/image.png)
+![alt text](image-5.png)
 
 > Sr: Phần đầu tiên của trạng thái S, gồm r bit (r = 64 bit)
 > 
@@ -97,11 +97,11 @@ Sau khi thêm padding, dữ liệu A sẽ được chia thành s khối, mỗi k
 > Sc: Phần còn lại của trạng thái S, gồm 320 -r bit (ví dụ: 256 bit đối với Ascon-128).
 > 
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0e7c9ce0-b713-4dbe-9577-be1bbceae63b/2e625b87-054f-4f66-8382-e060f7c05857/image.png)
+![alt text](image-6.png)
 
 ## ✨Processing Plaintext
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0e7c9ce0-b713-4dbe-9577-be1bbceae63b/d4c7caec-f8e3-4dbe-afdb-54bf6f1a4778/image.png)
+![alt text](image-7.png)
 
 Quá trình đệm thêm một số 1 và số 0
 
@@ -115,25 +115,25 @@ Quá trình đệm thêm một số 1 và số 0
 
 ### Encryption
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0e7c9ce0-b713-4dbe-9577-be1bbceae63b/f132dc85-5998-401b-81ee-511455ff9dac/image.png)
+![alt text](image-8.png)
 
 Trích xuất khối bản mã `Ci` (ciphertext block `Ci`) được gán bởi `Sr` ( phần đầu tiên của trạng thái `S`) `XOR` với `Pi`
 
 Tiếp theo, nối `Ci` với `Sc` (phần còn lại của trạng thái `S`) rồi hoán vị b lần và gán cho `S`. Với `i=t` thì không cần hoán vị.
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0e7c9ce0-b713-4dbe-9577-be1bbceae63b/194f9da6-d511-48d0-a265-44e65d8f2515/image.png)
+![alt text](image-9.png)
 
 Khối bản mã cuối cùng `Ct` được cắt ngắn theo `|P| mod r` bit đầu sao cho độ dài  nằm trong khoảng 0 đến r-1 bit. Và chiều dài của bản mã `C` giống với bản rõ `P`.
 
 ### Decryption
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0e7c9ce0-b713-4dbe-9577-be1bbceae63b/05e47574-698d-47f5-80ca-08614f6a951f/image.png)
+![alt text](image-10.png)
 
 Trừ lần lặp cuối cùng, khối bản rõ Pi được tính bằng cách `XOR` khối bản mã `Ci` với `Sr`.
 
 Tiếp theo, nối `Ci` với `Sc`  (phần còn lại của trạng thái `S`) rồi hoán vị `b` lần và gán cho `S` (trừ khối cuối cùng).
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0e7c9ce0-b713-4dbe-9577-be1bbceae63b/9c9ef7dc-d7cd-4cb0-a2f0-4dfec87f10ef/image.png)
+![alt text](image-11.png)
 
 Khối văn bản mã hóa cuối cùng đã được cắt ngắn `Sr` và `XOR` với `Ct cuối`để lấy phần cuối của văn bản gốc:
 
@@ -141,7 +141,7 @@ Trạng thái `S` được cập nhật với phần đoạn văn bản gốc cu
 
 ## ✨Finalization
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0e7c9ce0-b713-4dbe-9577-be1bbceae63b/e262c5c9-2e29-42de-877e-15dd3ef341b1/image.png)
+![alt text](image-12.png)
 
 > c là độ dài của trạng thái (256 bit), k là độ dài khóa ( 128), và r là độ dài khối(64 bit).
 > 
@@ -154,23 +154,23 @@ Thẻ T bao gồm 128 bit, được XOR bởi 128 bit cuối của cả S và K
 
 `Pa` và `Pb` chỉ khác nhau về số vòng. Số vòng a và số vòng b là các thông số bảo mật có thể điều chỉnh.
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0e7c9ce0-b713-4dbe-9577-be1bbceae63b/58d262fd-18ee-4f3f-b050-165b53e9ba7c/image.png)
+![alt text](image-13.png)
 
 320 bit S được chia thành 5 thanh ghi 64 bit
 
 - Addition of Constants (Pc)
     
-    ![Hằng số tròn cr được sử dụng trong mỗi vòng i của pa và pb](https://prod-files-secure.s3.us-west-2.amazonaws.com/0e7c9ce0-b713-4dbe-9577-be1bbceae63b/7756d2a8-557b-45c9-bf81-7524bfb8dfdf/image.png)
+    ![Hằng số tròn cr được sử dụng trong mỗi vòng i của pa và pb](image-14.png)
     
     Hằng số tròn cr được sử dụng trong mỗi vòng i của pa và pb
     
-    ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0e7c9ce0-b713-4dbe-9577-be1bbceae63b/f3053cd7-c655-4546-be3b-bb19df4caac7/image.png)
+    ![alt text](image-15.png)
     
 - Substitution Layer (Ps)
     
     Sau đó lấy từng bit một của mỗi xi trong đó `x0` là `MSB` còn x4 là `LSB` và so sánh với bảng dưới đây làm lần lượt hết 64 bit.
     
-    ![S-box S 5-bit của Ascon làm bảng tra cứu](https://prod-files-secure.s3.us-west-2.amazonaws.com/0e7c9ce0-b713-4dbe-9577-be1bbceae63b/cb3ddb75-d0e7-4cbe-addb-6d13b009be70/image.png)
+    ![S-box S 5-bit của Ascon làm bảng tra cứu](image-16.png)
     
     S-box S 5-bit của Ascon làm bảng tra cứu
     
@@ -196,7 +196,7 @@ Thẻ T bao gồm 128 bit, được XOR bởi 128 bit cuối của cả S và K
     
 - Linear Diffusion Layer (Ps)
     
-    ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0e7c9ce0-b713-4dbe-9577-be1bbceae63b/51edbaf6-7340-42a5-a934-b620a36ff123/image.png)
+    ![alt text](image-17.png)
     
     Σ0(x0)
     
